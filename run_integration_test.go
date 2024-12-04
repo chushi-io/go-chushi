@@ -309,6 +309,7 @@ func TestRunsCreate(t *testing.T) {
 			Refresh:      Bool(false),
 			ReplaceAddrs: []string{"null_resource.example"},
 			TargetAddrs:  []string{"null_resource.example"},
+			ExcludeAddrs: []string{"null_resource.exclude"},
 		}
 
 		r, err := client.Runs.Create(ctx, options)
@@ -317,6 +318,7 @@ func TestRunsCreate(t *testing.T) {
 		assert.Equal(t, *options.Refresh, r.Refresh)
 		assert.Equal(t, options.ReplaceAddrs, r.ReplaceAddrs)
 		assert.Equal(t, options.TargetAddrs, r.TargetAddrs)
+		assert.Equal(t, options.ExcludeAddrs, r.ExcludeAddrs)
 		assert.Nil(t, r.Variables)
 	})
 
