@@ -125,6 +125,7 @@ type Run struct {
 	AllowConfigGeneration  *bool                `jsonapi:"attr,allow-config-generation,omitempty"`
 	AllowEmptyApply        bool                 `jsonapi:"attr,allow-empty-apply"`
 	CreatedAt              time.Time            `jsonapi:"attr,created-at,iso8601"`
+	ExcludeAddrs           []string             `jsonapi:"attr,exclude-addrs,omitempty"`
 	ForceCancelAvailableAt time.Time            `jsonapi:"attr,force-cancel-available-at,iso8601"`
 	HasChanges             bool                 `jsonapi:"attr,has-changes"`
 	IsDestroy              bool                 `jsonapi:"attr,is-destroy"`
@@ -327,6 +328,10 @@ type RunCreateOptions struct {
 	// (destroys and then re-creates) the objects specified by the given
 	// resource addresses.
 	ReplaceAddrs []string `jsonapi:"attr,replace-addrs,omitempty"`
+
+	// If non-empty requests that Tofu should create a plan including
+	// all of the given objects except for the resources specified
+	ExcludeAddrs []string `jsonapi:"attr,exclude-addrs,omitempty"`
 
 	// AutoApply determines if the run should be applied automatically without
 	// user confirmation. It defaults to the Workspace.AutoApply setting.
